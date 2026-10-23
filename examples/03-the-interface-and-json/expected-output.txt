@@ -1,0 +1,4 @@
+ID-1 / BANK
+True
+{"group_header":{"message_identification":"MSG-001","creation_date_time":"2026-01-01T00:00:00","number_of_settlement_requests":"0","control_sum":null,"settlement_information":null},"settlement_request":[],"supplementary_data":null}
+True

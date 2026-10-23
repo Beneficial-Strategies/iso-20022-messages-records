@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- The two newest .NET LTS releases. The records need records, required members and collection expressions of C# 12, and are not offered for netstandard2.0. -->
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>BeneficialStrategies.Iso20022</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageFiles>$(MSBuildThisFileDirectory)..\..\artifacts\package\</PackageFiles>
+    <PackageId>BeneficialStrategies.Iso20022.Messages.Records</PackageId>
+    <PackageDescription>The records of every ISO 20022 message, component and choice, written at compile time from the interfaces of iso-20022-messages by a Roslyn source generator: immutable, compared by value, read and written as XML and JSON.</PackageDescription>
+    <!-- The README and the release notes of a release are made by tools/package/prepare_package_files.py; without them (a local pack) the README of the repository is used. -->
+    <PackageReleaseNotes Condition="Exists('$(PackageFiles)release-notes.txt')">$([System.IO.File]::ReadAllText("$(PackageFiles)release-notes.txt"))</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(PackageFiles)README.md" Pack="true" PackagePath="\" Condition="Exists('$(PackageFiles)README.md')" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" Condition="!Exists('$(PackageFiles)README.md')" />
+    <None Include="..\..\.beneficial\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- From the lowest version that works to just below the next breaking change. -->
+    <PackageReference Include="BeneficialStrategies.Iso20022.Messages" Version="[1.0.1-alpha, 1.1.0)" />
+    <PackageReference Include="BeneficialStrategies.Iso20022.Primitives" Version="[1.0.1-alpha, 1.1.0)" />
+    <!-- The generator runs in the compiler and writes the records; nothing of it goes into the package. -->
+    <ProjectReference Include="..\Generator\BeneficialStrategies.Iso20022.Messages.Records.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <!-- The generator copies the documentation of the interfaces to the records: it reads the XML file that sits next to the Messages assembly. -->
+  <Target Name="PassTheDocumentationOfTheInterfacesToTheGenerator" BeforeTargets="CoreCompile" DependsOnTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <_MessagesAssembly Include="@(ReferencePath)" Condition="'%(Filename)' == 'BeneficialStrategies.Iso20022.Messages'" />
+      <AdditionalFiles Include="@(_MessagesAssembly->'%(RootDir)%(Directory)%(Filename).xml')" />
+    </ItemGroup>
+  </Target>
+
+</Project>

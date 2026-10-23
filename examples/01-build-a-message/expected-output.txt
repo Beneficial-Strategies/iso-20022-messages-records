@@ -1,0 +1,18 @@
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.029.001.02">
+  <MulSttlmReq>
+    <GrpHdr>
+      <MsgId>MSG-001</MsgId>
+      <CreDtTm>2026-01-01T00:00:00</CreDtTm>
+      <NbOfSttlmReqs>1</NbOfSttlmReqs>
+    </GrpHdr>
+    <SttlmReq>
+      <InstrId>INSTR-001</InstrId>
+      <MvmntRcrd>
+        <Id>MOV-001</Id>
+        <Amt>
+          <Amt Ccy="EUR">100</Amt>
+        </Amt>
+      </MvmntRcrd>
+    </SttlmReq>
+  </MulSttlmReq>
+</Document>
