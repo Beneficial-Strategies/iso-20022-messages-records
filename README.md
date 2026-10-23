@@ -158,8 +158,8 @@ The records are the ready-made implementation. They are the convenient way to ge
 
 | You want | Package |
 |---|---|
-| the rules the types cannot express, as FluentValidation validators for these messages | [BeneficialStrategies.Iso20022.FluentValidation](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.FluentValidation) (business-rule validation: constraints the C# type system alone can't express) |
-| to validate XML or JSON text, a document or a queue payload, with every problem reported | [BeneficialStrategies.Iso20022.FluentValidation.Xml](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.FluentValidation.Xml) and [.Payloads](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.FluentValidation.Payloads) |
+| the rules the types cannot express, as FluentValidation validators for these messages | [BeneficialStrategies.Iso20022.Messages.Validation](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Messages.Validation) (business-rule validation: constraints the C# type system alone can't express) |
+| to validate XML or JSON text, a document or a queue payload, with every problem reported | [BeneficialStrategies.Iso20022.Validation.Xml](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Validation.Xml) and [.Xml.Payloads](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Validation.Xml.Payloads) |
 | the same tools **without** the records (your own classes, or classes made for you on the fly) | [BeneficialStrategies.Iso20022.Messages](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Messages) and [BeneficialStrategies.Iso20022.Factory](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Factory) |
 | only the primitive types, not the message records | [BeneficialStrategies.Iso20022.Primitives](https://www.nuget.org/packages/BeneficialStrategies.Iso20022.Primitives) (this package depends on it; the namespaces are the same in both) |
 
