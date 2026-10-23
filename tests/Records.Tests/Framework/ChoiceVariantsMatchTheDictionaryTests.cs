@@ -5,7 +5,7 @@ using BeneficialStrategies.Iso20022.Framework;
 namespace BeneficialStrategies.Iso20022;
 
 /// <summary>
-/// Every variant of every choice in the newest spec snapshot (<c>snapshot-sync/*/spec-snapshot.tsv</c>) exists in the code with
+/// Every variant of every choice in a spec snapshot (the <c>spec-snapshot.tsv</c> that <c>ISO20022_SNAPSHOT_FILE</c> names) exists in the code with
 /// the XML tag the dictionary gives it, and a variant that holds a single value has the dictionary's type for it. That is what
 /// decides the element name and the content of a choice in the XML (the XSD of a choice is generated from the same entries).
 /// </summary>
@@ -13,15 +13,11 @@ public class ChoiceVariantsMatchTheDictionaryTests
 {
     private sealed record Variant(string Choice, string Name, string Tag, string Type);
 
+    /// <summary>The snapshot file that <c>ISO20022_SNAPSHOT_FILE</c> names (a <c>spec-snapshot.tsv</c>), or null.</summary>
     private static string? FindSnapshot()
     {
-        var dir = new DirectoryInfo(AppContext.BaseDirectory);
-        for (var i = 0; i < 5 && dir.Parent is not null; i++)
-            dir = dir.Parent;
-        var root = Path.Combine(dir.FullName, "snapshot-sync");
-        return Directory.Exists(root)
-            ? Directory.GetDirectories(root).OrderBy(d => d, StringComparer.Ordinal).Select(d => Path.Combine(d, "spec-snapshot.tsv")).LastOrDefault(File.Exists)
-            : null;
+        var file = Environment.GetEnvironmentVariable("ISO20022_SNAPSHOT_FILE");
+        return !string.IsNullOrEmpty(file) && File.Exists(file) ? file : null;
     }
 
     private static IEnumerable<Variant> DictionaryVariants(string path) =>
@@ -42,7 +38,7 @@ public class ChoiceVariantsMatchTheDictionaryTests
         return props.Length == 1 ? props[0].GetCustomAttribute<IsoXmlTagAttribute>()?.XmlTag : null;
     }
 
-    [Fact]
+    [FactIfSnapshot]
     public void EveryVariantOfTheDictionary_ExistsWithItsXmlTag()
     {
         var snapshot = FindSnapshot();
@@ -67,7 +63,7 @@ public class ChoiceVariantsMatchTheDictionaryTests
         Assert.True(problems.Count == 0, $"{problems.Count} of {count} variants differ:" + Environment.NewLine + string.Join(Environment.NewLine, problems.Take(40)));
     }
 
-    [Fact]
+    [FactIfSnapshot]
     public void TheVariantsThatHoldAnImpliedAmount_HaveTheDictionarysTagAndType()
     {
         var snapshot = FindSnapshot();
@@ -84,7 +80,7 @@ public class ChoiceVariantsMatchTheDictionaryTests
         }
     }
 
-    [Fact]
+    [FactIfSnapshot]
     public void AVariantThatHoldsOneValue_HasTheDictionarysTypeForIt()
     {
         var snapshot = FindSnapshot();
@@ -108,5 +104,16 @@ public class ChoiceVariantsMatchTheDictionaryTests
         }
         Assert.True(checkedCount > 1000, $"only {checkedCount} single-value variants were compared");
         Assert.True(problems.Count == 0, $"{problems.Count} of {checkedCount} variants differ:" + Environment.NewLine + string.Join(Environment.NewLine, problems.Take(40)));
+    }
+}
+
+/// <summary>A fact that runs only when <c>ISO20022_SNAPSHOT_FILE</c> names a spec snapshot (<c>spec-snapshot.tsv</c>).</summary>
+public sealed class FactIfSnapshotAttribute : FactAttribute
+{
+    public FactIfSnapshotAttribute()
+    {
+        var file = Environment.GetEnvironmentVariable("ISO20022_SNAPSHOT_FILE");
+        if (string.IsNullOrEmpty(file) || !File.Exists(file))
+            Skip = "Set ISO20022_SNAPSHOT_FILE to a spec-snapshot.tsv to run this test.";
     }
 }
