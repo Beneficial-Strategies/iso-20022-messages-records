@@ -1,0 +1,3 @@
+read: MSG-001
+RequiredMissing Document/MulSttlmReq/GrpHdr/MsgId: Required element <MsgId> is missing.
+FacetViolation Document/MulSttlmReq/GrpHdr/NbOfSttlmReqs: 'Max15NumericText' contains characters outside the allowed set (0-9): 'many'.
