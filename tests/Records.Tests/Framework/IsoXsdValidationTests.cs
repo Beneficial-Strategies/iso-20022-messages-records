@@ -81,7 +81,7 @@ public class IsoXsdValidationTests
     {
         var type = Iso20022MessageTypeRegistry.ByIsoIdentifier[id];
         var read = typeof(Iso20022XmlSerializer).GetMethods().Single(m => m.Name == "TryRead" && m.GetParameters()[0].ParameterType == typeof(string)).MakeGenericMethod(type);
-        var result = read.Invoke(null, [xml])!;
+        var result = read.Invoke(null, [xml, null])!;   // TryRead(string xml, IIsoDataFactory? factory = null): reflection needs both arguments
         var issues = (System.Collections.IEnumerable)result.GetType().GetProperty("Issues")!.GetValue(result)!;
         var message = result.GetType().GetProperty("Message")!.GetValue(result);
         Assert.True(message is not null, $"{id}: the sample is not read: " + string.Join("; ", issues.Cast<object>()));
