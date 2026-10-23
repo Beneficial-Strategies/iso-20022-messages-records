@@ -14,6 +14,8 @@ The records of every ISO 20022 message, component and choice, written at compile
 
 ## Working here
 
+* Background: `docs/BuildPerformance.md` (why a full build of the model is heavy, and what it costs now) and `docs/TestPatterns.md` (validating against ISO's XSDs, embedded XML samples and their resource names).
+
 * **Never edit a generated record, and there is none to edit**: a change to the model is made in the repository of the interfaces (iso-20022-messages); a change to what a record looks like is made in the generator, with a test in `tests/Generator.Tests`. A full build compiles the whole model (about two minutes, several gigabytes of memory).
 * Never commit, push or open a pull request unless asked in that turn. Work on a branch; every pull request is linked to an issue (`Closes #n`).
 * Never commit `.claude/`. Generated or derived files go under `artifacts/` (ignored) or a `_work/` folder outside the repository, not into it.
