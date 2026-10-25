@@ -96,7 +96,7 @@ public class Pacs008ExamplesTests
     {
         var creditorWithLei = Iso20022TestData.Creditor with
         {
-            Identification = new OrganisationIdentification { LEI = "969500T3MBS4SQAMHJ45", },
+            Identification = new OrganisationIdentification { LEI = "5493001KJTIIGC8Y1R12", },
         };
 
         var message = new FIToFICustomerCreditTransferV11
