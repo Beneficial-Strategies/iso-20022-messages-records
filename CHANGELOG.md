@@ -2,6 +2,11 @@
 
 The versions of this package have three parts, `design.breaking.compatible`: the first changes with a redesign, the second with a change that breaks existing users, the third with every other change. Newest first. Each entry is written from the issues closed since the previous release.
 
+## 1.0.0 (2026-10-25)
+
+* Added: First stable release: the records of 1.0.0-alpha, written by the source generator from the interfaces, depending on the stable Primitives 1.1.1 and Messages 1.0.1 (#18).
+* Changed: The README links to the packages by the names they have now (#6).
+
 ## 1.0.0-alpha (2026-10-23)
 
 * Added: The first publication of the package: the records of every ISO 20022 message, component and choice, **written at compile time by a source generator from the interfaces of `BeneficialStrategies.Iso20022.Messages`**, instead of typed by hand. It replaces `BeneficialStrategies.Iso20022` (the records package of the earlier monorepo, whose last version is 0.7.0-alpha); the namespaces are unchanged, so code that used it changes only its package reference.
