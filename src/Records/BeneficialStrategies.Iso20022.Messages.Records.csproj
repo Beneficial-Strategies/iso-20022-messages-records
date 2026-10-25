@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <!-- From the lowest version that works to just below the next breaking change. -->
-    <PackageReference Include="BeneficialStrategies.Iso20022.Messages" Version="[1.0.1-alpha, 1.1.0)" />
-    <PackageReference Include="BeneficialStrategies.Iso20022.Primitives" Version="[1.0.1-alpha, 1.1.0)" />
+    <PackageReference Include="BeneficialStrategies.Iso20022.Messages" Version="[1.0.1, 1.1.0)" />
+    <PackageReference Include="BeneficialStrategies.Iso20022.Primitives" Version="[1.1.1, 1.2.0)" />
     <!-- The generator runs in the compiler and writes the records; nothing of it goes into the package. -->
     <ProjectReference Include="..\Generator\BeneficialStrategies.Iso20022.Messages.Records.Generator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>

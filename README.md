@@ -26,14 +26,6 @@ This package covers all currently defined messages in the ISO specification, plu
 - **Multiplicity-correct**: where a field allows multiple values, it's a collection; where it's optional, it's nullable.
 - **Strongly-typed identifiers**: industry-specific identifiers like CUSIP, SEDOL, IBAN, and BIC are strongly typed, not bare strings; because the implementation is strongly-typed all the way down to the primitives, dirty data that doesn't fit the ISO 20022 spec can never be introduced into your system in the first place.
 
-## Install
-
-```
-dotnet add package BeneficialStrategies.Iso20022.Messages.Records --prerelease
-```
-
-The package is in alpha, so the command asks for a prerelease version. It brings the interfaces and the primitive types. Three examples follow, each a step further.
-
 ## How to use
 
 ### Build a message
@@ -149,7 +141,7 @@ Try the [project](https://github.com/Beneficial-Strategies/iso-20022-messages-re
 ## More
 
 * Documentation, release notes and issues: https://github.com/Beneficial-Strategies/iso-20022-messages-records
-* License: MIT. Status: alpha.
+* License: MIT. Status: stable.
 * Targets net8.0 and net10.0.
 
 ### Where the records fit

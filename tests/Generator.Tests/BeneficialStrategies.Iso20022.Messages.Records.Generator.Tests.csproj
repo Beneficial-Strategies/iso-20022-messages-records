@@ -14,7 +14,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
     <!-- The tiny interface assemblies of the tests are compiled against it. -->
-    <PackageReference Include="BeneficialStrategies.Iso20022.Primitives" Version="[1.0.1-alpha, 1.1.0)" />
+    <PackageReference Include="BeneficialStrategies.Iso20022.Primitives" Version="[1.1.1, 1.2.0)" />
     <ProjectReference Include="..\..\src\Generator\BeneficialStrategies.Iso20022.Messages.Records.Generator.csproj" />
   </ItemGroup>
 
